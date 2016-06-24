@@ -1,0 +1,55 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+ <h1>Listing Products:</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Category</th>
+      </tr>
+    </thead>
+    <tbody>
+    	<% @product.reverse.each do |t| %>
+      <tr>
+
+        <td><%=t.name%></td>
+        <td><%=t.description%></td>
+        <td><%=t.pricing%></td>
+        <td><%= t.category.name %></td>
+        <td><a href="/products/<%=t.id%>">show</a> | <a href="/products/<%=t.id%>/edit">Edit</a> | 
+        <form action = "/products/<%=t.id%>" method = "post">
+			<input type = "hidden" name = "authenticity_token" value = "<%= form_authenticity_token %>">
+			<input type = "hidden" name = "_method" value = "delete">
+			<input type = "submit" value = "delete">
+		</form>
+      </tr>
+      <%end%>
+    </tbody>
+  </table>
+ 	<a href="/product/new">New Products</a>
+ 	<form action = "/comments" method = "get">
+			
+			<input type = "submit" value = "All Comments">
+	</form>
+
+</div>
+
+</body>
+</html>
+ 

@@ -1,0 +1,27 @@
+
+
+<h4> <b style="color:blue;">Name:</b> <%= @product.name %></h4>
+<h4> <b style="color:blue;">Description:</b> <%= @product.description %></h4>
+<h4><b style="color:blue;">Price:</b>  <%= @product.pricing %></h4>
+<h4><b style="color:blue;">Category:</b>  <%= @product.category.name %></h4>
+
+
+<h2>Comment</h2>
+<form action="/comments" method="post">
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+    <div class="form-group">
+      <input type="text" class="form-control" name="comment[comment]" >
+      <input type="hidden" name="comment[product_id]" value="<%= @product.id %>"">
+      <input type="submit" class="btn btn-default" value="submit" />
+    </div>
+</form>
+	<%@comment.each do |t| %>
+		<%= t.comment %>
+		<%= t.created_at.to_formatted_s(:long_ordinal) %>
+	<br />
+	<br />
+
+	<%end%>
+<br /><br /><br /><br />
+<a href="/products/edit/<%=@product.id%>">Edit</a> |
+<a href="/products">Back</a>
